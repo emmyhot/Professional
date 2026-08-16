@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Explore</title>
+   <style>
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+         margin: 0;
+         font-family: Arial, sans-serif;
+         background: linear-gradient(180deg, #0b0b6b 0%, #111827 100%);
+         color: #f8fafc;
+      }
+      a { text-decoration: none; }
+      header {
+         position: sticky;
+         top: 0;
+         z-index: 10;
+         background: rgba(11, 11, 107, 0.9);
+         backdrop-filter: blur(8px);
+         border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .topbar {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 18px 20px;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         gap: 20px;
+      }
+      .logo-link {
+         display: inline-flex;
+         align-items: center;
+      }
+      .nav-links {
+         display: flex;
+         align-items: center;
+         gap: 18px;
+         flex-wrap: wrap;
+      }
+      .nav-links a {
+         color: #e2e8f0;
+         font-weight: 600;
+      }
+      .nav-links a:hover { color: #ffffff; }
+      .nav-cta {
+         background: #facc15;
+         color: #111827;
+         padding: 10px 18px;
+         border-radius: 999px;
+         font-weight: 800;
+      }
+      main {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 30px 20px 60px;
+      }
+      .hero {
+         background: linear-gradient(135deg, rgba(59,130,246,0.14), rgba(30,41,59,0.35));
+         border: 1px solid rgba(255,255,255,0.08);
+         border-radius: 26px;
+         padding: 36px 28px;
+         display: grid;
+         grid-template-columns: 1.2fr 0.8fr;
+         gap: 24px;
+         align-items: center;
+         margin-bottom: 28px;
+      }
+      .eyebrow {
+         display: inline-block;
+         background: rgba(255,255,255,0.08);
+         border: 1px solid rgba(255,255,255,0.2);
+         color: #dbeafe;
+         border-radius: 999px;
+         padding: 8px 12px;
+         font-size: 0.8rem;
+         font-weight: 700;
+         letter-spacing: 0.04em;
+         text-transform: uppercase;
+      }
+      .page-title {
+         text-align: left;
+         font-size: clamp(2.2rem, 4vw, 4rem);
+         margin: 18px 0 12px;
+         line-height: 1.1;
+      }
+      .intro {
+         max-width: 700px;
+         margin: 0 0 20px;
+         color: #dbeafe;
+         font-size: 1.08rem;
+         line-height: 1.7;
+      }
+      .hero-actions {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 14px;
+         margin-top: 20px;
+      }
+      .primary-btn, .secondary-btn {
+         display: inline-block;
+         padding: 13px 22px;
+         border-radius: 12px;
+         font-weight: 700;
+      }
+      .primary-btn {
+         background: #facc15;
+         color: #111827;
+      }
+      .secondary-btn {
+         background: transparent;
+         border: 1px solid rgba(255,255,255,0.24);
+         color: #f8fafc;
+      }
+      .hero-panel {
+         background: #ffffff;
+         color: #0f172a;
+         border-radius: 20px;
+         padding: 20px;
+         box-shadow: 0 20px 35px rgba(15, 23, 42, 0.18);
+      }
+      .panel-badge {
+         display: inline-block;
+         background: #dbeafe;
+         color: #1d4ed8;
+         font-weight: 700;
+         border-radius: 999px;
+         padding: 6px 10px;
+         font-size: 0.78rem;
+      }
+      .hero-panel h3 {
+         margin: 16px 0 10px;
+         font-size: 1.6rem;
+      }
+      .hero-list {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         display: grid;
+         gap: 10px;
+         color: #334155;
+      }
+      .hero-list li::before {
+         content: '✔';
+         color: #16a34a;
+         margin-right: 8px;
+         font-weight: 700;
+      }
+      .stats {
+         display: grid;
+         grid-template-columns: repeat(3, minmax(0, 1fr));
+         gap: 18px;
+         margin: 30px 0 40px;
+      }
+      .stat {
+         background: rgba(255,255,255,0.06);
+         border: 1px solid rgba(255,255,255,0.08);
+         border-radius: 18px;
+         padding: 20px;
+         text-align: center;
+      }
+      .stat strong {
+         display: block;
+         font-size: 2rem;
+         margin-bottom: 8px;
+      }
+      .feature-strip {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 12px;
+         margin-bottom: 30px;
+      }
+      .feature-pill {
+         background: rgba(255,255,255,0.08);
+         border: 1px solid rgba(255,255,255,0.15);
+         border-radius: 999px;
+         padding: 8px 16px;
+         color: #f8fafc;
+         font-weight: 600;
+      }
+      .section-head {
+         margin: 18px 0 18px;
+         font-size: 2rem;
+      }
+      .toolbar {
+         display: flex;
+         flex-wrap: wrap;
+         align-items: center;
+         justify-content: space-between;
+         gap: 16px;
+         margin: 24px 0 18px;
+      }
+      .search-box {
+         flex: 1;
+         min-width: 220px;
+         max-width: 420px;
+         padding: 12px 14px;
+         border-radius: 12px;
+         border: 1px solid rgba(255,255,255,0.15);
+         background: rgba(255,255,255,0.06);
+         color: #f8fafc;
+         font-size: 1rem;
+      }
+      .search-box::placeholder {
+         color: #cbd5e1;
+      }
+      .filter-bar {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 10px;
+      }
+      .filter-btn {
+         background: rgba(255,255,255,0.08);
+         color: #f8fafc;
+         border: 1px solid rgba(255,255,255,0.15);
+         border-radius: 999px;
+         padding: 9px 14px;
+         cursor: pointer;
+         font-weight: 700;
+      }
+      .filter-btn.active {
+         background: #facc15;
+         color: #111827;
+         border-color: #facc15;
+      }
+      .benefits {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+         gap: 18px;
+         margin: 20px 0 40px;
+      }
+      .benefit {
+         background: rgba(255,255,255,0.06);
+         border: 1px solid rgba(255,255,255,0.1);
+         border-radius: 18px;
+         padding: 20px;
+      }
+      .benefit h3 {
+         margin: 0 0 10px;
+         color: #f8fafc;
+      }
+      .benefit p {
+         margin: 0;
+         color: #dbeafe;
+         line-height: 1.6;
+      }
+      .outcomes {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+         gap: 18px;
+         margin: 20px 0 40px;
+      }
+      .outcome {
+         background: rgba(255,255,255,0.06);
+         border: 1px solid rgba(255,255,255,0.1);
+         border-radius: 18px;
+         padding: 20px;
+      }
+      .outcome h3 {
+         margin: 0 0 8px;
+         color: #f8fafc;
+      }
+      .outcome p {
+         margin: 0;
+         color: #dbeafe;
+         line-height: 1.7;
+      }
+      .roadmap {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+         gap: 18px;
+         margin: 20px 0 40px;
+      }
+      .roadmap-step {
+         background: rgba(255,255,255,0.06);
+         border: 1px solid rgba(255,255,255,0.1);
+         border-radius: 18px;
+         padding: 20px;
+      }
+      .roadmap-step .step-number {
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         width: 36px;
+         height: 36px;
+         border-radius: 50%;
+         background: #facc15;
+         color: #111827;
+         font-weight: 800;
+         margin-bottom: 10px;
+      }
+      .roadmap-step h3 {
+         margin: 0 0 8px;
+         color: #f8fafc;
+      }
+      .roadmap-step p {
+         margin: 0;
+         color: #dbeafe;
+         line-height: 1.6;
+      }
+      .cards {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+         gap: 24px;
+      }
+      .card {
+         background: #ffffff;
+         color: #111827;
+         border-radius: 18px;
+         overflow: hidden;
+         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+         display: flex;
+         flex-direction: column;
+         transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .card:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 18px 32px rgba(0, 0, 0, 0.22);
+      }
+      .card-image {
+         width: 100%;
+         height: 180px;
+         object-fit: contain;
+         background: #eff6ff;
+         padding: 18px;
+      }
+      .card-body {
+         padding: 18px 18px 20px;
+         display: flex;
+         flex-direction: column;
+         gap: 12px;
+         flex: 1;
+      }
+      .card h2 {
+         margin: 0;
+         font-size: 1.6rem;
+         color: #111827;
+      }
+      .type-tag {
+         display: inline-block;
+         width: fit-content;
+         background: #dbeafe;
+         color: #1d4ed8;
+         font-size: 0.8rem;
+         border-radius: 999px;
+         padding: 6px 10px;
+         font-weight: 700;
+      }
+      .card p {
+         margin: 0;
+         color: #4b5563;
+         line-height: 1.6;
+      }
+      .detail-list {
+         margin: 0;
+         padding-left: 18px;
+         color: #374151;
+         display: grid;
+         gap: 6px;
+      }
+      .price {
+         font-size: 1.4rem;
+         font-weight: 800;
+         color: #0f172a;
+      }
+      .pay-btn {
+         margin-top: auto;
+         display: inline-block;
+         width: 100%;
+         background: #2563eb;
+         color: white;
+         text-decoration: none;
+         text-align: center;
+         padding: 12px 16px;
+         border-radius: 10px;
+         font-weight: 700;
+         transition: background 0.2s ease;
+      }
+      .pay-btn:hover {
+         background: #1d4ed8;
+      }
+      .testimonials {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+         gap: 18px;
+         margin: 20px 0 40px;
+      }
+      .testimonial {
+         background: rgba(255,255,255,0.06);
+         border: 1px solid rgba(255,255,255,0.1);
+         border-radius: 18px;
+         padding: 20px;
+      }
+      .testimonial p {
+         margin: 0 0 12px;
+         color: #dbeafe;
+         line-height: 1.7;
+      }
+      .testimonial strong {
+         color: #f8fafc;
+      }
+      .faq {
+         margin-top: 42px;
+         display: grid;
+         gap: 16px;
+      }
+      .faq-item {
+         background: rgba(255,255,255,0.06);
+         border: 1px solid rgba(255,255,255,0.08);
+         border-radius: 16px;
+         padding: 18px 20px;
+      }
+      .faq-item h3 {
+         margin: 0 0 10px;
+         font-size: 1.1rem;
+      }
+      .faq-item p {
+         margin: 0;
+         color: #dbeafe;
+         line-height: 1.7;
+      }
+      .trust-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+         gap: 18px;
+         margin: 20px 0 40px;
+      }
+      .trust-item {
+         background: rgba(255,255,255,0.06);
+         border: 1px solid rgba(255,255,255,0.12);
+         border-radius: 18px;
+         padding: 20px;
+      }
+      .trust-item h3 {
+         margin: 0 0 8px;
+      }
+      .trust-item p {
+         margin: 0;
+         color: #dbeafe;
+         line-height: 1.7;
+      }
+      .pricing-box {
+         margin-top: 32px;
+         background: rgba(255,255,255,0.06);
+         border: 1px solid rgba(255,255,255,0.1);
+         border-radius: 20px;
+         padding: 22px;
+      }
+      .pricing-box h3 {
+         margin: 0 0 12px;
+      }
+      .pricing-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+         gap: 14px;
+      }
+      .pricing-item {
+         background: rgba(255,255,255,0.04);
+         border: 1px solid rgba(255,255,255,0.08);
+         border-radius: 16px;
+         padding: 18px;
+      }
+      .pricing-item strong {
+         display: block;
+         color: #f8fafc;
+         font-size: 1.2rem;
+         margin-bottom: 8px;
+      }
+      .pricing-item span {
+         color: #dbeafe;
+      }
+      .meta-row {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 8px;
+         margin-top: 4px;
+      }
+      .meta-pill {
+         display: inline-block;
+         background: #e0f2fe;
+         color: #0f172a;
+         border-radius: 999px;
+         padding: 5px 10px;
+         font-size: 0.72rem;
+         font-weight: 700;
+      }
+      .cta-banner {
+         margin-top: 40px;
+         background: linear-gradient(135deg, #facc15, #f59e0b);
+         color: #111827;
+         border-radius: 22px;
+         padding: 28px 24px;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         gap: 20px;
+         flex-wrap: wrap;
+      }
+      .cta-banner h3 {
+         margin: 0 0 8px;
+         font-size: 1.8rem;
+      }
+      .cta-banner p {
+         margin: 0;
+         font-size: 1rem;
+         color: #1f2937;
+      }
+      .cta-banner a {
+         display: inline-block;
+         background: #111827;
+         color: #f8fafc;
+         border-radius: 12px;
+         padding: 12px 20px;
+         font-weight: 800;
+      }
+      footer {
+         margin-top: 40px;
+         padding: 28px 20px 10px;
+         border-top: 1px solid rgba(255,255,255,0.1);
+         text-align: center;
+         color: #dbeafe;
+      }
+      .bottom-note {
+         margin-top: 40px;
+         text-align: center;
+         color: #dbeafe;
+         font-size: 1rem;
+      }
+      @media (max-width: 860px) {
+         .hero {
+            grid-template-columns: 1fr;
+         }
+         .stats {
+            grid-template-columns: 1fr;
+         }
+      }
+   </style>
+</head>
+<body>
+   <header>
+      <div class="topbar">
+         <a href="index.html" class="logo-link"><img src="images/logo.svg" alt="Learn IT logo" height="40"></a>
+         <nav class="nav-links" aria-label="Main navigation">
+            <a href="#courses">Courses</a>
+            <a href="#benefits">Benefits</a>
+            <a href="#faq">FAQ</a>
+            <a href="https://wa.me/2347060951943" target="_blank" rel="noopener" class="nav-cta">Pay Now</a>
+         </nav>
+      </div>
+   </header>
+
+   <main>
+      <section class="hero">
+         <div>
+            <span class="eyebrow">Learn with confidence</span>
+            <h1 class="page-title">Build your tech skills with practical programming courses.</h1>
+            <p class="intro">
+               Learn the most important web and programming languages for building modern digital products. From structure and styling to database logic and version control, each course is built to help you grow fast and work confidently.
+            </p>
+            <div class="hero-actions">
+               <a class="primary-btn" href="#courses">Explore courses</a>
+               <a class="secondary-btn" href="https://wa.me/2347060951943?text=I%20want%20to%20learn%20more" target="_blank" rel="noopener">Talk to us</a>
+            </div>
+         </div>
+
+         <div class="hero-panel">
+            <span class="panel-badge">Popular track</span>
+            <h3>Front-end + Back-end foundation</h3>
+            <ul class="hero-list">
+               <li>Beginner-friendly lessons</li>
+               <li>Career-focused coding skills</li>
+               <li>Project-ready learning path</li>
+               <li>Fast WhatsApp payment support</li>
+            </ul>
+         </div>
+      </section>
+
+      <div class="stats">
+         <div class="stat"><strong>10</strong>Core courses</div>
+         <div class="stat"><strong>100%</strong>Beginner ready</div>
+         <div class="stat"><strong>24/7</strong>WhatsApp support</div>
+      </div>
+
+      <div class="feature-strip">
+         <span class="feature-pill">Beginner friendly</span>
+         <span class="feature-pill">Real-world projects</span>
+         <span class="feature-pill">Career-focused learning</span>
+         <span class="feature-pill">Certificate-ready</span>
+      </div>
+
+      <section id="benefits">
+         <h2 class="section-head">Why learn with us</h2>
+         <div class="benefits">
+            <div class="benefit">
+               <h3>Clear lessons</h3>
+               <p>Each course explains the core concept simply so you can understand and apply it quickly.</p>
+            </div>
+            <div class="benefit">
+               <h3>Practical skills</h3>
+               <p>You learn tools and techniques that are actually used in web development and software work.</p>
+            </div>
+            <div class="benefit">
+               <h3>Easy payment</h3>
+               <p>Choose a course and pay instantly through WhatsApp using the button on each card.</p>
+            </div>
+            <div class="benefit">
+               <h3>Career growth</h3>
+               <p>These languages create a strong foundation for web design, development, and digital careers.</p>
+            </div>
+         </div>
+      </section>
+
+      <section id="courses">
+         <h2 class="section-head">Choose your course</h2>
+         <div class="toolbar">
+            <input id="searchInput" class="search-box" type="text" placeholder="Search a language..." aria-label="Search courses">
+            <div class="filter-bar" id="filterBar"></div>
+         </div>
+         <div class="cards" id="cards"></div>
+      </section>
+
+      <section>
+         <h2 class="section-head">Your learning roadmap</h2>
+         <div class="roadmap">
+            <div class="roadmap-step">
+               <div class="step-number">1</div>
+               <h3>Start with basics</h3>
+               <p>Learn HTML and CSS to understand how websites are built and styled.</p>
+            </div>
+            <div class="roadmap-step">
+               <div class="step-number">2</div>
+               <h3>Make it interactive</h3>
+               <p>Use JavaScript to add animation, logic, and user actions to your websites.</p>
+            </div>
+            <div class="roadmap-step">
+               <div class="step-number">3</div>
+               <h3>Build smart solutions</h3>
+               <p>Study Python and SQL to solve problems, automate tasks, and manage data efficiently.</p>
+            </div>
+            <div class="roadmap-step">
+               <div class="step-number">4</div>
+               <h3>Work as a team</h3>
+               <p>Learn Git to track changes, collaborate with others, and manage projects professionally.</p>
+            </div>
+         </div>
+      </section>
+
+      <section>
+         <h2 class="section-head">What you'll achieve</h2>
+         <div class="outcomes">
+            <div class="outcome">
+               <h3>Build real websites</h3>
+               <p>Create landing pages, portfolios, and responsive web interfaces using HTML, CSS, and JavaScript.</p>
+            </div>
+            <div class="outcome">
+               <h3>Automate tasks</h3>
+               <p>Use Python to simplify repetitive work and build small smart tools that save time and effort.</p>
+            </div>
+            <div class="outcome">
+               <h3>Understand data</h3>
+               <p>Learn SQL to work with data, manage records, and handle information in a structured way.</p>
+            </div>
+            <div class="outcome">
+               <h3>Work with teams</h3>
+               <p>Use Git to track development progress and collaborate effectively in real projects.</p>
+            </div>
+         </div>
+      </section>
+
+      <section id="faq" class="faq">
+         <h2 class="section-head">Frequently asked questions</h2>
+         <div class="faq-item">
+            <h3>Do I need coding experience before starting?</h3>
+            <p>No. These courses are designed for beginners and introduce core ideas in a simple and practical way.</p>
+         </div>
+         <div class="faq-item">
+            <h3>Can I pay after choosing a course?</h3>
+            <p>Yes. Each course card has a Pay button that opens WhatsApp and sends your selected course name automatically.</p>
+         </div>
+         <div class="faq-item">
+            <h3>Which language should I start with?</h3>
+            <p>If you are new to web development, start with HTML and CSS, then move on to JavaScript and Python.</p>
+         </div>
+      </section>
+
+      <section>
+         <h2 class="section-head">What students say</h2>
+         <div class="testimonials">
+            <div class="testimonial">
+               <p>“The course was easy to understand and helped me build my first portfolio website in a few days.”</p>
+               <strong>— Ada, Web Design Student</strong>
+            </div>
+            <div class="testimonial">
+               <p>“I liked the practical approach. The JavaScript lessons made it easier to understand real app behavior.”</p>
+               <strong>— Tobi, Frontend Learner</strong>
+            </div>
+            <div class="testimonial">
+               <p>“The payment process was simple and the lessons were clear enough to follow without confusion.”</p>
+               <strong>— Mary, Beginner Developer</strong>
+            </div>
+         </div>
+      </section>
+
+      <section>
+         <h2 class="section-head">Why learners trust us</h2>
+         <div class="trust-grid">
+            <div class="trust-item">
+               <h3>Beginner Friendly</h3>
+               <p>Every course is designed to make first-time learners feel comfortable and confident.</p>
+            </div>
+            <div class="trust-item">
+               <h3>Practical Skills</h3>
+               <p>You learn methods and tools that are directly useful in real projects and job tasks.</p>
+            </div>
+            <div class="trust-item">
+               <h3>Fast Support</h3>
+               <p>Questions, payments, and enrollment are handled quickly through WhatsApp.</p>
+            </div>
+         </div>
+      </section>
+
+      <div class="pricing-box">
+         <h3>Simple pricing</h3>
+         <div class="pricing-grid">
+            <div class="pricing-item"><strong>Starter</strong><span>HTML & CSS from $400,000</span></div>
+            <div class="pricing-item"><strong>Pro</strong><span>JavaScript + Python from $500,000</span></div>
+            <div class="pricing-item"><strong>Data</strong><span>SQL & Git from $690,000</span></div>
+         </div>
+      </div>
+
+      <div class="cta-banner">
+         <div>
+            <h3>Ready to start learning?</h3>
+            <p>Pick any course and pay through WhatsApp in seconds.</p>
+         </div>
+         <a href="https://wa.me/2347060951943?text=I%20want%20to%20start%20learning" target="_blank" rel="noopener">Start Now</a>
+      </div>
+
+      <footer>
+         Learn IT Academy © 2026 • Your next step into tech starts here.
+      </footer>
+
+      <p class="bottom-note">Choose a language, learn the basics, and pay quickly through WhatsApp.</p>
+   </main>
+
+   <script>
+      const courses = [
+         {
+            name: 'HTML',
+            image: 'images/html.svg',
+            price: '$400,000',
+            tag: 'Frontend',
+            level: 'Beginner',
+            duration: '2 weeks',
+            desc: 'HTML is the foundation of web pages.',
+            what: 'HTML stands for HyperText Markup Language. It is used to create the structure of a webpage, such as headings, paragraphs, buttons, forms, and text content.',
+            points: ['Makes web pages readable by browsers', 'Adds headings, images, links, and forms', 'Works with CSS and JavaScript to build modern sites']
+         },
+         {
+            name: 'CSS',
+            image: 'images/css.svg',
+            price: '$100,000',
+            tag: 'Styling',
+            level: 'Beginner',
+            duration: '2 weeks',
+            desc: 'CSS gives websites their design and layout.',
+            what: 'CSS stands for Cascading Style Sheets. It controls colors, spacing, fonts, positioning, animations, and responsive layouts.',
+            points: ['Styles text, buttons, and page layout', 'Creates beautiful modern designs', 'Helps websites look good on mobile and desktop']
+         },
+         {
+            name: 'JavaScript',
+            image: 'images/js.svg',
+            price: '$500,000',
+            tag: 'Interactivity',
+            level: 'Intermediate',
+            duration: '3 weeks',
+            desc: 'JavaScript adds behavior to your websites.',
+            what: 'JavaScript is the programming language used to make websites interactive. It can handle clicks, forms, animations, and dynamic content.',
+            points: ['Adds interactivity to web pages', 'Works with HTML and CSS', 'Used in modern apps and frontend frameworks']
+         },
+         {
+            name: 'Python',
+            image: 'images/python.svg',
+            price: '$690,000',
+            tag: 'General Purpose',
+            level: 'Beginner',
+            duration: '4 weeks',
+            desc: 'Python is a flexible and beginner-friendly language.',
+            what: 'Python is a powerful programming language used for automation, data analysis, web development, AI, and scripting.',
+            points: ['Easy to learn for beginners', 'Used in automation and backend development', 'Popular for AI, scripts, and data work']
+         },
+         {
+            name: 'SQL',
+            image: 'images/sql.svg',
+            price: '$600,000',
+            tag: 'Database',
+            level: 'Intermediate',
+            duration: '3 weeks',
+            desc: 'SQL helps store and manage information.',
+            what: 'SQL is the language used to query and manage databases. It lets you create tables, insert data, and retrieve information efficiently.',
+            points: ['Works with MySQL, PostgreSQL, and SQLite', 'Used in data-driven apps', 'Helps manage records and analysis']
+         },
+         {
+            name: 'Git',
+            image: 'images/git.svg',
+            price: '$500,000',
+            tag: 'Collaboration',
+            level: 'Beginner',
+            duration: '1 week',
+            desc: 'Git tracks changes in your project work.',
+            what: 'Git is a version control system used to track code changes, save progress, and collaborate with other developers.',
+            points: ['Helps you track code versions', 'Useful for team collaboration', 'Essential for software projects and coding jobs']
+         }
+      ];
+
+      const cardsContainer = document.getElementById('cards');
+      const searchInput = document.getElementById('searchInput');
+      const filterBar = document.getElementById('filterBar');
+      const categories = ['All', 'Frontend', 'Styling', 'Interactivity', 'General Purpose', 'Database', 'Collaboration'];
+      let activeFilter = 'All';
+
+      function renderFilters() {
+         filterBar.innerHTML = categories.map((category) => `
+            <button class="filter-btn ${category === activeFilter ? 'active' : ''}" data-filter="${category}">${category}</button>
+         `).join('');
+
+         document.querySelectorAll('.filter-btn').forEach((button) => {
+            button.addEventListener('click', () => {
+               activeFilter = button.dataset.filter;
+               renderFilters();
+               renderCourses();
+            });
+         });
+      }
+
+      function renderCourses() {
+         const searchTerm = searchInput.value.trim().toLowerCase();
+
+         const filteredCourses = courses.filter((course) => {
+            const matchFilter = activeFilter === 'All' || course.tag === activeFilter;
+            const matchSearch = course.name.toLowerCase().includes(searchTerm) || course.desc.toLowerCase().includes(searchTerm) || course.what.toLowerCase().includes(searchTerm);
+            return matchFilter && matchSearch;
+         });
+
+         cardsContainer.innerHTML = filteredCourses.map((course) => {
+            const whatsappLink = `https://wa.me/2347060951943?text=${encodeURIComponent('I want to pay for ' + course.name)}`;
+            return `
+               <article class="card">
+                  <img class="card-image" src="${course.image}" alt="${course.name} icon">
+                  <div class="card-body">
+                     <span class="type-tag">${course.tag}</span>
+                     <h2>${course.name}</h2>
+                     <p>${course.desc}</p>
+                     <div class="meta-row">
+                        <span class="meta-pill">${course.level}</span>
+                        <span class="meta-pill">${course.duration}</span>
+                     </div>
+                     <p><strong>What is ${course.name}?</strong> ${course.what}</p>
+                     <ul class="detail-list">
+                        ${course.points.map((point) => `<li>${point}</li>`).join('')}
+                     </ul>
+                     <div class="price">Price: ${course.price}</div>
+                     <a class="pay-btn" href="${whatsappLink}" target="_blank" rel="noopener">Pay</a>
+                  </div>
+               </article>
+            `;
+         }).join('');
+
+         if (!filteredCourses.length) {
+            cardsContainer.innerHTML = '<div style="grid-column: 1 / -1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; color: #dbeafe; text-align: center;">No courses match your search. Try another language or category.</div>';
+         }
+      }
+
+      searchInput.addEventListener('input', renderCourses);
+      renderFilters();
+      renderCourses();
+   </script>
+</body>
+</html>

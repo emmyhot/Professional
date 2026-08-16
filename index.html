@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn IT</title>
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+         background-color: midnightblue;
+         color: white;
+         width: 100%;
+         max-width: 1400px;
+         margin: 0 auto;
+         overflow-x: hidden; 
+         padding: 0 0 0 0; 
+         align-content: center;
+         align-self: center;
+         alignment-baseline: central;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 6%;
+            background-color: midnightblue;
+            box-shadow: 0 2px 5px black(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Placeholder for the Logo */
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color:midnightblue;
+            color: whitesmoke;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            border: 2px solid midnightblue;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            color: midnightblue;
+            font-size: 1.2rem;
+            letter-spacing: 1px;        
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+        text-decoration: dotted;
+        color: black;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+        white-space: nowrap;            
+        }
+
+        /* Very Fine color for home link */
+        nav ul li a.active, nav ul li a:hover {
+            color:white; /* Warm Gold accent */
+        }
+
+        /* Dropdown styling for features like Admissions */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+            list-style: none;
+            min-width: 210px;
+            padding: 10px 0;
+            border-top: 3px solid #f0a500;
+            border-radius: 0 0 10px 10px;
+            z-index: 10;
+        }
+
+        .dropdown-menu li a {
+            padding: 12px 20px;
+            display: block;
+            font-weight: 500;
+            color: #1a1e43;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #fff6df;
+            color: #a81c1c;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: midnightblue; /* Deep Blue from your layout */
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 10%;
+            min-height: 550px;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-text .sub-tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero-text .moral-tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+
+        .para{
+            color: white;
+            font-style:oblique;
+            font-weight: lighter;
+            font-size: x-large;
+            font-family: "Brush Script MT", cursive;
+            font-size: 40px;
+            background-color: midnightblue;
+            
+        }
+
+        .bests{
+            font-family: 'Courier New', Courier, monospace;
+            font-size: large;
+            color: black;
+            font-size: large;
+        }
+
+        .best{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: 700;
+            color:green;
+            font-size: xx-large;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: white;
+            color: #1a1e43;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            background-color: #ffe066;
+        }
+
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            font-weight: 500; 
+            margin-bottom: 10px; 
+            height: 700px; 
+        }
+
+        /* Clean placeholder card structure for the student image */
+        .hero-image-placeholder {
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            background: linear-gradient(135deg, #475569, #334155);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid #ffffff;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .image {
+            align-self: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        /* --- Features Overview Section --- */
+        .features-section {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 10%;
+            text-align: center;
+            background-color: midnightblue;
+            color: white;
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .Ammega-section {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 10%;
+            text-align: center;
+            background-color: white;
+        }
+
+         .Ammega-section h2 {
+            font-size: 2.5rem;
+            color: #1a1e43;
+            margin-bottom: 40px;
+        }
+
+        .new {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 10%;
+            text-align:left;
+            background-color:#431a1a;
+        }
+
+        .new h2 {
+            font-size: 2.5rem;
+            color:white;
+            margin-bottom: 40px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            color: midnightblue;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            align-content: center;
+        }
+
+        .row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .card {
+            position:relative;
+            min-width: 160px;
+            height: 240px;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+            padding: 18px;
+        }
+
+        .card:hover {
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+
+        .card-no {
+            padding-bottom: 35px;
+            font-weight: 700px;
+            color: white;
+        }
+
+
+        .feature-cards {
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background-color: seashell;
+            color: midnightblue;
+        }
+
+        .feature-cards:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-cards2 {
+            background-color:lavender;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .Our-schools {
+            padding: 60px 10%;
+            text-align: center;
+            background-color:seashell;
+        }
+
+        .Our-schools h3 {
+        font-size: 2.5rem;
+        color: #1a1e43;
+        margin-bottom: 40px;
+        }
+
+        .Our-schools .grid-container {
+            justify-items: center;
+        }
+
+        .Our-schools .image-class {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: auto;
+        }
+
+        .Our-schools .school-photo-card {
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            background: transparent;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .Our-schools .image-class img {
+            width: min(100%, 560px);
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+            transition: transform 0.3s ease;
+            margin: 0 auto;
+        }
+
+        .Our-schools .image-class:hover img {
+            transform: scale(1.05);
+        }
+
+        .feature {
+            background-color: wheat;
+        }
+
+        .feature-cards2:hover {
+            transform: translative(-5px);
+        }
+
+        .feature-cards h3 {
+            color:midnightblue;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .feature-cards p {
+            color: midnightblue;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+
+        .gallery-section {
+            background: linear-gradient(180deg, midnightblue 0%, midnightblue 100%);
+        }
+
+        .gallery-section .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 25px;
+        }
+
+        .gallery-section .gallery-card {
+            background: white;
+            border-radius: 18px;
+            padding: 14px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+            border: 1px solid rgba(168, 28, 28, 0.10);
+            overflow: hidden;
+        }
+
+        .gallery-section .gallery-card .gallery-media {
+            width: 100%;
+            height: 290px;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-section .gallery-card video.gallery-media {
+            background: #111827;
+        }
+
+        .gallery-section .gallery-card:hover .gallery-media {
+            transform: scale(1.08);
+        }
+
+        .gallery-section .gallery-card .card-no {
+            display: inline-block;
+            padding: 0 0 12px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: midnightblue;
+        }
+
+        .What-say {
+            font-size: large;
+        }
+
+        .school-highlights,
+        .admissions-steps,
+        .campus-life,
+        .contact-section {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 70px 10%;
+        }
+
+        .school-highlights {
+            background: midnightblue;
+    
+        }
+
+        .admissions-steps {
+            background: midnightblue;
+        }
+
+        .campus-life {
+            background: #f8fafc;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .admissions-steps .section-title h2,
+        .admissions-steps .section-title p {
+            color: #fff;
+        }
+
+        .stats-grid,
+        .steps-grid,
+        .campus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .stat-card,
+        .step-card,
+        .campus-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(168, 28, 28, 0.10);
+            color: midnightblue;
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 2rem;
+            color: midnightblue;
+            margin-bottom: 8px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .step-card span {
+            display: inline-block;
+            background: #f0a500;
+            color: #1a1e43;
+            border-radius: 999px;
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .step-card h3,
+        .campus-card h3 {
+            margin-bottom: 10px;
+            color: green;
+        }
+
+        .admissions-steps .step-card h3,
+        .admissions-steps .step-card p {
+            color: #fff;
+        }
+
+        .campus-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 14px;
+        }
+
+        .contact-section .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-section .section-title h2 {
+            color: green;
+            font-size: 2.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-section .section-title p {
+            color: #475569;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 28px;
+            align-items: center;
+            align-self: center;
+            align-content: center;
+        }
+
+        .contact-info,
+        .contact-form {
+            background: midnightblue;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(168, 28, 28, 0.12);
+            color: white;
+            align-items: center;
+        }
+
+        .contact-info .badge {
+            background:green;
+            color: #fff;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+        }
+
+        .contact-info .badge h3 {
+            margin-bottom: 4px;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            background: midnightblue;
+            padding: 14px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .contact-icon {
+            min-width: 42px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: rgba(168, 28, 28, 0.12);
+            color: white;
+            font-weight: 700;
+        }
+
+        .contact-row strong {
+            display: block;
+            color:white;
+            margin-bottom: 3px;
+        }
+
+        .contact-form h3 {
+            color:white;
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 700;
+            color: green;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border: 2px solid white;
+            outline: none;
+            color:white;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #f0a500;
+            box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.16);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            width: 100%;
+            border: none;
+            background:green;
+            color: #fff;
+            cursor: pointer;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: 0.25s ease;
+        }
+
+        .contact-form button:hover {
+            background: green;
+            transform: translateY(-1px);
+        }
+
+        @media (max-device-width: 1024px) {
+        .image-class {
+        cursor: pointer;
+    }
+}
+        
+
+        /* Responsive Breakpoints */
+        @media (max-width: 968px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 5%;
+            }
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            .hero-image-placeholder {
+                height: 280px;
+            }
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .Esther-Okafor {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .Esther-Okafor>a {
+            /* text-decoration: none; */
+            color: rgb(139, 131, 131);
+            padding: 7px;
+            text-shadow: #1a1e43;
+        }
+
+        .Esther-Okafor:hover >a {
+            transform: transitive(-5px)
+        }
+
+        /* Base Footer Styles */
+        .site-footer {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color:white;
+            color: #9ca3af; /* Light gray text */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 60px 0 20px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1.5fr;
+          gap: 40px;
+        }
+
+        /* Typography & Headings */
+        .footer-column h4 {
+          color: #ffffff;
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 20px;
+          position: relative;
+        }
+
+        .footer-logo {
+          color: #431a1a;
+          font-size: 22px;
+          font-weight: 700;
+          margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+          color: midnightblue;
+        }
+        .footer-logo span {
+          color: #3b82f6; /* Vibrant blue accent */
+        }
+
+        /* Links formatting */
+        .footer-column ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .footer-column ul li {
+          margin-bottom: 12px;
+        }
+
+        .footer-column a {
+          color: #9ca3af;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+          color: #3b82f6;
+        }
+
+        /* Social Icons Placeholder */
+        .social-icons {
+          display: flex;
+          gap: 12px;
+          margin-top: 15px;
+        }
+
+        .social-icons a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          background-color: #1f2937;
+          color: #ffffff;
+          border-radius: 50%;
+          font-weight: bold;
+          font-size: 12px;
+          transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-icons a:hover {
+          background-color: #3b82f6;
+          color: #ffffff;
+          transform: translateY(-3px);
+        }
+
+        /* Bottom Copyright Bar */
+        .footer-bottom {
+          max-width: 1200px;
+          margin: 60px auto 0 auto;
+          padding: 20px 20px 0 20px;
+          border-top: 1px solid #1f2937;
+          text-align: center;
+          font-size: 13px;
+        }
+    
+
+        /* Responsive Layout for Tablets and Mobile */
+        @media (max-width: 360px) {
+          .footer-container {
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .footer-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
+
+          .social-icons {
+            justify-content: center;
+          }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-placeholder">
+            <a href="index.html">
+                <img src="images/logo.svg" height="60" alt="Learn IT logo">
+            </a>
+            </div>
+            <div class="logo-text">Learn Occupation's on IT</div>
+        </div>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="explore.html">Explore</a>
+                </li>
+                <li class="dropdown">
+                    <a href="about.html">About</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-text">
+            <p>Information & Communication {IT}</p>
+            <h1>LEARN DIFFRENT OCCUPATION'S ON {IT}</h1>
+            <a class="cta-btn" href="explore.html">Explore</a>
+        </div>
+        <div class="hero-image-container">
+            <img src="Man_explaining_coding_with_laptop_202606081854.jpeg" alt="Man">
+        </div>
+    </section>
+
+     <section class="features-section">
+        <h2>Our Core Portals</h2>
+        <div class="grid-container">
+            <div class="feature-cards">
+                <h3>Easy Learning</h3>
+                <p>Ability to compete in quiz and copy notes</p>
+            </div>
+            <div class="feature-card">
+                <h3>Contact Us</h3>
+                <p>You can easily contct us on Whatsapp at +2347060951943</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="school-highlights">
+        <div class="section-title">
+            <h2>Our Highlights</h2>
+            <p>Your service is our concern.</p>
+            
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <strong>1,200+</strong>
+                <p>Space for Enrollment of Students.</p>
+            </div>
+            <div class="stat-card">
+                <strong>65+</strong>
+                <p>IT based topics to learn.</p>
+            </div>
+            <div class="stat-card">
+                <strong>32+</strong>
+                <p>Questions and answers.</p>
+            </div>
+        </div>
+    </section>
+    <section>
+<div class="contact-layout">
+            <div class="contact-info">
+                <div class="contact-row">
+                    <div class="contact-icon">☎</div>
+                    <div>
+                        <strong>Phone</strong>
+                        <span>+234 706 095 1943</span>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="contact-icon">✉</div>
+                    <div>
+                        <strong>Email</strong>
+                        <span>emmyhot419@gmail.com</span>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="contact-icon">⌂</div>
+                    <div>
+                        <strong>Address</strong>
+                        <span>Dokaje, Romi Kaduna, Nigeria</span>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="contact-icon">⏰</div>
+                    <div>
+                        <strong>Office Hours</strong>
+                        <span>Mon - Fri: 8:00 AM - 4:00 PM</span>
+                    </div>
+                </div>
+            </div>
+</section>
+            <section class="Ammega-section gallery-section">
+                <div class="section-title">
+                    <h3 class="para">Gallery</h3>
+                    <h2>Our activities</h2>
+                </div>
+                <div class="gallery-grid">
+                    <a class="gallery-card" href="explore.html?topic=html">
+                        <img class="gallery-media" src="images/html.svg" alt="HTML">
+                        <span class="card-no">HTML</span>
+                    </a>
+
+                    <a class="gallery-card" href="explore.html?topic=css">
+                        <img class="gallery-media" src="images/css.svg" alt="CSS">
+                        <span class="card-no">CSS</span>
+                    </a>
+
+                    <a class="gallery-card" href="explore.html?topic=js">
+                        <img class="gallery-media" src="images/js.svg" alt="JavaScript">
+                        <span class="card-no">JavaScript</span>
+                    </a>
+
+                    <a class="gallery-card" href="explore.html?topic=python">
+                        <img class="gallery-media" src="images/python.svg" alt="Python">
+                        <span class="card-no">Python</span>
+                    </a>
+
+                    <a class="gallery-card" href="explore.html?topic=sql">
+                        <img class="gallery-media" src="images/sql.svg" alt="SQL">
+                        <span class="card-no">SQL</span>
+                    </a>
+
+                    <a class="gallery-card" href="explore.html?topic=git">
+                        <img class="gallery-media" src="images/git.svg" alt="Git">
+                        <span class="card-no">Git</span>
+                    </a>
+                </div>
+            </section>
+
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column about">
+                <h3 class="footer-logo">Information<span>Technology</span></h3>
+                <p>Building modern digital experiences with a focus on clean design, elegant code, and exceptional user experience.</p>
+            </div>
+
+            <div class="footer-column links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="explore.html">Explore</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
