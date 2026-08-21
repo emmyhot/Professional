@@ -848,6 +848,8 @@
 
          cardsContainer.innerHTML = filteredCourses.map((course) => {
             const whatsappLink = `https://wa.me/2347060951943?text=${encodeURIComponent('I want to pay for ' + course.name)}`;
+            const courseLink = course.name === 'CSS' ? 'css-note.html' : whatsappLink;
+            const isExternalLink = course.name !== 'CSS';
             return `
                <article class="card">
                   <img class="card-image" src="${course.image}" alt="${course.name} icon">
@@ -864,7 +866,7 @@
                         ${course.points.map((point) => `<li>${point}</li>`).join('')}
                      </ul>
                      <div class="price">Price: ${course.price}</div>
-                     <a class="pay-btn" href="${whatsappLink}" target="_blank" rel="noopener">Pay</a>
+                     <a class="pay-btn" href="${courseLink}" ${isExternalLink ? 'target="_blank" rel="noopener"' : ''}>${course.name === 'CSS' ? 'Open' : 'Pay'}</a>
                   </div>
                </article>
             `;
