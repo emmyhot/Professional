@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn CSS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background:midnightblue;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #4dabf7;
+            margin-bottom: 8px;
+        }
+
+        nav {
+            background: #333;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav button {
+            background: transparent;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        nav button:hover {
+            background: #4dabf7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .lesson {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .lesson.active {
+            display: block;
+        }
+
+        h2 {
+            color: #1971c2;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        code {
+            background: #eee;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background: #1e1e1e;
+            color: #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .example {
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .example-box {
+            background: #4dabf7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .editor {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
+        }
+
+        iframe {
+            width: 100%;
+            height: 250px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .quiz {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f1f3f5;
+            border-radius: 8px;
+        }
+
+        .quiz button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 12px;
+            border: none;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .quiz button:hover {
+            background: #d0ebff;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .next-btn {
+            margin-top: 30px;
+            padding: 12px 20px;
+            border: none;
+            background: #1971c2;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .next-btn:hover {
+            background: #1864ab;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 30px;
+            background: #222;
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+            .editor {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Learn CSS</h1>
+    <p>Learn how CSS works and how to style websites.</p>
+</header>
+
+<nav>
+    <button onclick="showLesson('intro')">Introduction</button>
+    <button onclick="showLesson('selectors')">Selectors</button>
+    <button onclick="showLesson('colors')">Colors</button>
+    <button onclick="showLesson('box')">Box Model</button>
+    <button onclick="showLesson('flexbox')">Flexbox</button>
+    <button onclick="showLesson('editor')">Practice</button>
+    <button onclick="showLesson('quiz')">Quiz</button>
+</nav>
+
+<div class="container">
+
+    <!-- INTRODUCTION -->
+    <section id="intro" class="lesson active">
+
+        <h2>Lesson 1: What is CSS?</h2>
+
+        <p>
+            CSS stands for <strong>Cascading Style Sheets</strong>.
+            It is used to control how HTML elements look on a webpage.
+        </p>
+
+        <p>
+            HTML creates the structure of a webpage, while CSS controls
+            its appearance.
+        </p>
+
+        <h3>Example</h3>
+
+        <pre>
+&lt;p&gt;Hello World&lt;/p&gt;
+
+p {
+    color: blue;
+    font-size: 30px;
+}
+        </pre>
+
+        <div class="example">
+            <p style="color: blue; font-size: 30px;">
+                Hello World
+            </p>
+        </div>
+
+        <h3>How CSS works</h3>
+
+        <p>CSS usually follows this structure:</p>
+
+        <pre>
+selector {
+    property: value;
+}
+        </pre>
+
+        <p>
+            The <strong>selector</strong> chooses an HTML element.
+        </p>
+
+        <p>
+            The <strong>property</strong> tells CSS what you want to change.
+        </p>
+
+        <p>
+            The <strong>value</strong> tells CSS how you want to change it.
+        </p>
+
+        <button class="next-btn" onclick="showLesson('selectors')">
+            Next Lesson →
+        </button>
+
+    </section>
+
+
+    <!-- SELECTORS -->
+    <section id="selectors" class="lesson">
+
+        <h2>Lesson 2: CSS Selectors</h2>
+
+        <p>
+            Selectors tell CSS which HTML elements should receive a style.
+        </p>
+
+        <h3>Element Selector</h3>
+
+        <pre>
+p {
+    color: red;
+}
+        </pre>
+
+        <p>
+            This selects every <code>&lt;p&gt;</code> element.
+        </p>
+
+        <h3>Class Selector</h3>
+
+        <pre>
+.title {
+    color: green;
+}
+        </pre>
+
+        <p>
+            Classes start with a period <code>.</code>.
+        </p>
+
+        <h3>ID Selector</h3>
+
+        <pre>
+#header {
+    background: black;
+}
+        </pre>
+
+        <p>
+            IDs start with the <code>#</code> symbol.
+        </p>
+
+        <div class="example">
+            <p class="example-box">This is a CSS example.</p>
+        </div>
+
+        <button class="next-btn" onclick="showLesson('colors')">
+            Next Lesson →
+        </button>
+
+    </section>
+
+
+    <!-- COLORS -->
+    <section id="colors" class="lesson">
+
+        <h2>Lesson 3: Colors</h2>
+
+        <p>
+            CSS allows you to change the color of text, backgrounds,
+            borders, and many other elements.
+        </p>
+
+        <h3>Color Names</h3>
+
+        <pre>
+p {
+    color: red;
+}
+        </pre>
+
+        <h3>Hexadecimal Colors</h3>
+
+        <pre>
+p {
+    color: #ff0000;
+}
+        </pre>
+
+        <h3>RGB Colors</h3>
+
+        <pre>
+p {
+    color: rgb(255, 0, 0);
+}
+        </pre>
+
+        <div class="example">
+            <p style="color: red;">Red text</p>
+            <p style="color: #1971c2;">Blue text</p>
+            <p style="color: rgb(0, 150, 70);">Green text</p>
+        </div>
+
+        <button class="next-btn" onclick="showLesson('box')">
+            Next Lesson →
+        </button>
+
+    </section>
+
+
+    <!-- BOX MODEL -->
+    <section id="box" class="lesson">
+
+        <h2>Lesson 4: The CSS Box Model</h2>
+
+        <p>
+            Every HTML element can be thought of as a box.
+        </p>
+
+        <p>The box model contains:</p>
+
+        <ul>
+            <li>Content</li>
+            <li>Padding</li>
+            <li>Border</li>
+            <li>Margin</li>
+        </ul>
+
+        <pre>
+.box {
+    width: 200px;
+    padding: 20px;
+    border: 5px solid black;
+    margin: 30px;
+}
+        </pre>
+
+        <div class="example">
+            <div style="
+                width: 200px;
+                padding: 20px;
+                border: 5px solid #1971c2;
+                margin: 30px auto;
+                text-align: center;
+            ">
+                CSS Box
+            </div>
+        </div>
+
+        <button class="next-btn" onclick="showLesson('flexbox')">
+            Next Lesson →
+        </button>
+
+    </section>
+
+
+    <!-- FLEXBOX -->
+    <section id="flexbox" class="lesson">
+
+        <h2>Lesson 5: CSS Flexbox</h2>
+
+        <p>
+            Flexbox is used to arrange elements in rows or columns.
+        </p>
+
+        <pre>
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+        </pre>
+
+        <div style="
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        ">
+            <div class="example-box">Box 1</div>
+            <div class="example-box">Box 2</div>
+            <div class="example-box">Box 3</div>
+        </div>
+
+        <h3>Important Flexbox Properties</h3>
+
+        <ul>
+            <li><code>display: flex;</code></li>
+            <li><code>justify-content</code></li>
+            <li><code>align-items</code></li>
+            <li><code>flex-direction</code></li>
+            <li><code>gap</code></li>
+            <li><code>flex-wrap</code></li>
+        </ul>
+
+        <button class="next-btn" onclick="showLesson('editor')">
+            Try CSS Yourself →
+        </button>
+
+    </section>
+
+
+    <!-- PRACTICE -->
+    <section id="editor" class="lesson">
+
+        <h2>Practice: Write CSS Yourself</h2>
+
+        <p>
+            Edit the CSS below and see the result immediately.
+        </p>
+
+        <div class="editor">
+
+            <textarea id="cssEditor">body {
+    background: lightblue;
+}
+
+h1 {
+    color: darkblue;
+    text-align: center;
+}
+
+.box {
+    background: white;
+    padding: 30px;
+    margin: 30px;
+    border-radius: 10px;
+}</textarea>
+
+            <iframe id="preview"></iframe>
+
+        </div>
+
+        <button class="next-btn" onclick="showLesson('quiz')">
+            Take the Quiz →
+        </button>
+
+    </section>
+
+
+    <!-- QUIZ -->
+    <section id="quiz" class="lesson">
+
+        <h2>CSS Quiz</h2>
+
+        <div class="quiz">
+
+            <h3>1. What does CSS stand for?</h3>
+
+            <button onclick="answer(this, false)">
+                Computer Style Sheets
+            </button>
+
+            <button onclick="answer(this, true)">
+                Cascading Style Sheets
+            </button>
+
+            <button onclick="answer(this, false)">
+                Creative Style System
+            </button>
+
+            <p class="result"></p>
+
+        </div>
+
+
+        <div class="quiz">
+
+            <h3>2. Which symbol is used for a class selector?</h3>
+
+            <button onclick="answer(this, false)">
+                #
+            </button>
+
+            <button onclick="answer(this, true)">
+                .
+            </button>
+
+            <button onclick="answer(this, false)">
+                @
+            </button>
+
+            <p class="result"></p>
+
+        </div>
+
+
+        <div class="quiz">
+
+            <h3>3. Which property changes text color?</h3>
+
+            <button onclick="answer(this, false)">
+                background
+            </button>
+
+            <button onclick="answer(this, true)">
+                color
+            </button>
+
+            <button onclick="answer(this, false)">
+                text-color
+            </button>
+
+            <p class="result"></p>
+
+        </div>
+
+    </section>
+
+</div>
+
+<footer>
+    <p>Learn CSS • Practice • Build • Improve</p>
+</footer>
+
+
+<script>
+
+    function showLesson(id) {
+
+        const lessons = document.querySelectorAll(".lesson");
+
+        lessons.forEach(function(lesson) {
+            lesson.classList.remove("active");
+        });
+
+        document.getElementById(id).classList.add("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    function answer(button, correct) {
+
+        const result = button.parentElement.querySelector(".result");
+
+        if (correct) {
+            result.textContent = "✓ Correct!";
+            result.style.color = "green";
+        } else {
+            result.textContent = "✗ Incorrect. Try again!";
+            result.style.color = "red";
+        }
+    }
+
+
+    const editor = document.getElementById("cssEditor");
+    const preview = document.getElementById("preview");
+
+    function updatePreview() {
+
+        const css = editor.value;
+
+        preview.srcdoc = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    ${css}
+                </style>
+            </head>
+
+            <body>
+
+                <h1>My CSS Website</h1>
+
+                <div class="box">
+                    <h2>Hello CSS!</h2>
+                    <p>
+                        You are controlling this page with CSS.
+                    </p>
+                </div>
+
+            </body>
+            </html>
+        `;
+    }
+
+    editor.addEventListener("input", updatePreview);
+
+    updatePreview();
+
+</script>
+
+</body>
+</html>
