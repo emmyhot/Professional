@@ -193,6 +193,59 @@
             color: white;
         }
 
+        .workspace-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            color: #f8fafc;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .workspace-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .save-indicator {
+            font-size: 0.8rem;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10b981;
+            color: #6ee7b7;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        .workspace-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-start-fresh {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-start-fresh:hover {
+            background: #dc2626;
+        }
+
         @media (max-width: 700px) {
             .editor {
                 grid-template-columns: 1fr;
@@ -201,6 +254,11 @@
             nav {
                 flex-wrap: wrap;
             }
+
+            .workspace-banner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -208,8 +266,8 @@
 <body>
 
 <header>
-    <h1>Learn CSS</h1>
-    <p>Learn how CSS works and how to style websites.</p>
+    <h1>Learn CSS Workspace</h1>
+    <p>Practice CSS, take notes, and track your progress automatically.</p>
 </header>
 
 <nav>
@@ -219,11 +277,29 @@
     <button onclick="showLesson('colors')">Colors</button>
     <button onclick="showLesson('box')">Box Model</button>
     <button onclick="showLesson('flexbox')">Flexbox</button>
-    <button onclick="showLesson('editor')">Practice</button>
+    <button onclick="showLesson('editor')">Practice Editor</button>
+    <button onclick="showLesson('notes')">My Notes</button>
     <button onclick="showLesson('quiz')">Quiz</button>
 </nav>
 
 <div class="container">
+
+    <!-- WORKSPACE SESSION BANNER -->
+    <div class="workspace-banner">
+        <div class="workspace-info">
+            <span id="sessionStatusDot" style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+            <strong id="sessionUserText">Workspace Session: Guest Mode</strong>
+            <span id="saveStatusBadge" class="save-indicator">Auto-Saved ✓</span>
+        </div>
+        <div class="workspace-actions">
+            <button class="btn-start-fresh" onclick="confirmStartFresh()" title="Clear editor and start fresh workspace">
+                🔄 Start Again / Reset
+            </button>
+            <a id="sessionAuthLink" href="login.html" style="background: #3b82f6; color: white; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
+                Sign In to Save Account Work
+            </a>
+        </div>
+    </div>
 
     <!-- INTRODUCTION -->
     <section id="intro" class="lesson active">
@@ -513,6 +589,26 @@ h1 {
 
         </div>
 
+        <button class="next-btn" onclick="showLesson('notes')">
+            My Notes & Scratchpad →
+        </button>
+
+    </section>
+
+
+    <!-- MY NOTES & SCRATCHPAD -->
+    <section id="notes" class="lesson">
+
+        <h2>My Personal CSS Notes & Scratchpad</h2>
+
+        <p>
+            Write down your custom notes, cheatsheets, or ideas. Your notes auto-save to your account in real-time!
+        </p>
+
+        <div style="margin-top: 15px;">
+            <textarea id="userNotes" placeholder="Type your personal notes, code snippets, or reminders here..." style="width: 100%; min-height: 280px; padding: 18px; border-radius: 10px; border: 1.5px solid #cbd5e1; font-family: monospace; font-size: 15px; background: #f8fafc; color: #1e293b; outline: none;"></textarea>
+        </div>
+
         <button class="next-btn" onclick="showLesson('quiz')">
             Take the Quiz →
         </button>
@@ -525,19 +621,19 @@ h1 {
 
         <h2>CSS Quiz</h2>
 
-        <div class="quiz">
+        <div class="quiz" data-question="q1">
 
             <h3>1. What does CSS stand for?</h3>
 
-            <button onclick="answer(this, false)">
+            <button onclick="answer(this, false, 'q1')">
                 Computer Style Sheets
             </button>
 
-            <button onclick="answer(this, true)">
+            <button onclick="answer(this, true, 'q1')">
                 Cascading Style Sheets
             </button>
 
-            <button onclick="answer(this, false)">
+            <button onclick="answer(this, false, 'q1')">
                 Creative Style System
             </button>
 
@@ -546,19 +642,19 @@ h1 {
         </div>
 
 
-        <div class="quiz">
+        <div class="quiz" data-question="q2">
 
             <h3>2. Which symbol is used for a class selector?</h3>
 
-            <button onclick="answer(this, false)">
+            <button onclick="answer(this, false, 'q2')">
                 #
             </button>
 
-            <button onclick="answer(this, true)">
+            <button onclick="answer(this, true, 'q2')">
                 .
             </button>
 
-            <button onclick="answer(this, false)">
+            <button onclick="answer(this, false, 'q2')">
                 @
             </button>
 
@@ -567,19 +663,19 @@ h1 {
         </div>
 
 
-        <div class="quiz">
+        <div class="quiz" data-question="q3">
 
             <h3>3. Which property changes text color?</h3>
 
-            <button onclick="answer(this, false)">
+            <button onclick="answer(this, false, 'q3')">
                 background
             </button>
 
-            <button onclick="answer(this, true)">
+            <button onclick="answer(this, true, 'q3')">
                 color
             </button>
 
-            <button onclick="answer(this, false)">
+            <button onclick="answer(this, false, 'q3')">
                 text-color
             </button>
 
@@ -595,45 +691,40 @@ h1 {
     <p>Learn CSS • Practice • Build • Improve</p>
 </footer>
 
-
+<script src="auth.js"></script>
 <script>
+    const editor = document.getElementById("cssEditor");
+    const preview = document.getElementById("preview");
+    const userNotes = document.getElementById("userNotes");
+    const saveStatusBadge = document.getElementById("saveStatusBadge");
+    const sessionUserText = document.getElementById("sessionUserText");
+    const sessionStatusDot = document.getElementById("sessionStatusDot");
+    let activeLessonId = 'intro';
+    let currentQuizAnswers = {};
+    let saveTimeout = null;
 
     function showLesson(id) {
-
+        activeLessonId = id;
         const lessons = document.querySelectorAll(".lesson");
 
         lessons.forEach(function(lesson) {
             lesson.classList.remove("active");
         });
 
-        document.getElementById(id).classList.add("active");
+        const target = document.getElementById(id);
+        if (target) {
+            target.classList.add("active");
+        }
 
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
+
+        triggerAutoSave();
     }
-
-
-    function answer(button, correct) {
-
-        const result = button.parentElement.querySelector(".result");
-
-        if (correct) {
-            result.textContent = "✓ Correct!";
-            result.style.color = "green";
-        } else {
-            result.textContent = "✗ Incorrect. Try again!";
-            result.style.color = "red";
-        }
-    }
-
-
-    const editor = document.getElementById("cssEditor");
-    const preview = document.getElementById("preview");
 
     function updatePreview() {
-
         const css = editor.value;
 
         preview.srcdoc = `
@@ -644,28 +735,120 @@ h1 {
                     ${css}
                 </style>
             </head>
-
             <body>
-
                 <h1>My CSS Website</h1>
-
                 <div class="box">
                     <h2>Hello CSS!</h2>
-                    <p>
-                        You are controlling this page with CSS.
-                    </p>
+                    <p>You are controlling this page with CSS.</p>
                 </div>
-
             </body>
             </html>
         `;
     }
 
-    editor.addEventListener("input", updatePreview);
+    function answer(button, correct, qId) {
+        const result = button.parentElement.querySelector(".result");
 
-    updatePreview();
+        if (correct) {
+            result.textContent = "✓ Correct!";
+            result.style.color = "green";
+        } else {
+            result.textContent = "✗ Incorrect. Try again!";
+            result.style.color = "red";
+        }
 
+        currentQuizAnswers[qId] = correct ? 'correct' : 'incorrect';
+        triggerAutoSave();
+    }
+
+    function triggerAutoSave() {
+        if (saveStatusBadge) {
+            saveStatusBadge.textContent = "Saving...";
+            saveStatusBadge.style.background = "rgba(240, 165, 0, 0.2)";
+            saveStatusBadge.style.color = "#facc15";
+            saveStatusBadge.style.borderColor = "#f0a500";
+        }
+
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => {
+            if (window.AuthEngine) {
+                window.AuthEngine.saveUserWork({
+                    cssCode: editor.value,
+                    userNotes: userNotes.value,
+                    activeLesson: activeLessonId,
+                    quizAnswers: currentQuizAnswers
+                });
+            }
+            if (saveStatusBadge) {
+                saveStatusBadge.textContent = "Auto-Saved ✓";
+                saveStatusBadge.style.background = "rgba(16, 185, 129, 0.2)";
+                saveStatusBadge.style.color = "#6ee7b7";
+                saveStatusBadge.style.borderColor = "#10b981";
+            }
+        }, 500);
+    }
+
+    function loadWorkspaceState() {
+        if (!window.AuthEngine) return;
+
+        const user = window.AuthEngine.getCurrentUser();
+        if (user) {
+            sessionUserText.textContent = `Workspace Session: Logged in as ${user.name} (@${user.username})`;
+            sessionStatusDot.style.background = "#10b981";
+            const sessionAuthLink = document.getElementById("sessionAuthLink");
+            if (sessionAuthLink) {
+                sessionAuthLink.textContent = "Account Active ✓";
+                sessionAuthLink.style.background = "rgba(255,255,255,0.15)";
+                sessionAuthLink.style.border = "1px solid rgba(255,255,255,0.3)";
+            }
+        } else {
+            sessionUserText.textContent = `Workspace Session: Guest Mode (Log in to persist across devices)`;
+            sessionStatusDot.style.background = "#facc15";
+        }
+
+        const work = window.AuthEngine.loadUserWork();
+        if (work) {
+            if (work.cssCode !== undefined) {
+                editor.value = work.cssCode;
+            }
+            if (work.userNotes !== undefined) {
+                userNotes.value = work.userNotes;
+            }
+            if (work.activeLesson) {
+                showLesson(work.activeLesson);
+            }
+            if (work.quizAnswers) {
+                currentQuizAnswers = work.quizAnswers;
+            }
+        }
+
+        updatePreview();
+    }
+
+    function confirmStartFresh() {
+        if (confirm("Are you sure you want to reset your workspace? This will restore clean starter code and notes.")) {
+            if (window.AuthEngine) {
+                const freshWork = window.AuthEngine.resetUserWork();
+                editor.value = freshWork.cssCode;
+                userNotes.value = freshWork.userNotes || '';
+                activeLessonId = 'intro';
+                showLesson('intro');
+                updatePreview();
+                if (saveStatusBadge) {
+                    saveStatusBadge.textContent = "Workspace Reset ✓";
+                }
+            }
+        }
+    }
+
+    editor.addEventListener("input", () => {
+        updatePreview();
+        triggerAutoSave();
+    });
+
+    userNotes.addEventListener("input", triggerAutoSave);
+
+    document.addEventListener("DOMContentLoaded", loadWorkspaceState);
 </script>
-
 </body>
 </html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In & Register | Learn IT</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0b0b6b 0%, #090d2a 50%, #111827 100%);
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Navigation */
+        header {
+            background: rgba(11, 11, 107, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 6%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            width: 44px;
+            height: 44px;
+            background: #3b82f6;
+            color: #ffffff;
+            font-weight: 800;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .logo-title {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #facc15;
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .auth-wrapper {
+            width: 100%;
+            max-width: 1050px;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        /* Features Side */
+        .auth-hero-side {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.6), rgba(15, 23, 42, 0.9)), url('Man_explaining_coding_with_laptop_202606081854.jpeg') center/cover;
+            padding: 45px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .auth-hero-side::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(11, 11, 107, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%);
+            z-index: 1;
+        }
+
+        .auth-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .auth-hero-tag {
+            display: inline-block;
+            background: rgba(250, 204, 21, 0.2);
+            border: 1px solid #facc15;
+            color: #facc15;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .auth-hero-title {
+            font-size: 2.1rem;
+            line-height: 1.25;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .auth-hero-desc {
+            color: #cbd5e1;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            background: #10b981;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-text strong {
+            display: block;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .feature-text span {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .demo-box {
+            position: relative;
+            z-index: 2;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px dashed rgba(255, 255, 255, 0.25);
+            padding: 16px;
+            border-radius: 14px;
+        }
+
+        .demo-box h4 {
+            color: #facc15;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .demo-box p {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Form Side */
+        .auth-form-side {
+            padding: 45px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Tab Controls */
+        .tab-switcher {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 5px;
+            margin-bottom: 28px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn.active {
+            background: #3b82f6;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+        }
+
+        .form-header {
+            margin-bottom: 24px;
+        }
+
+        .form-header h2 {
+            font-size: 1.7rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .form-header p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #cbd5e1;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            padding: 14px 16px;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 0.85rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+
+        .remember-me input {
+            accent-color: #3b82f6;
+            width: 16px;
+            height: 16px;
+        }
+
+        .forgot-link {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Alert Toast */
+        .alert-box {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .alert-box.error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+        }
+
+        .alert-box.success {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #6ee7b7;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 880px) {
+            .auth-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .auth-hero-side {
+                display: none;
+            }
+            .auth-form-side {
+                padding: 35px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-group">
+                <div class="logo-badge">IT</div>
+                <div class="logo-title">Learn IT</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Explore</a></li>
+                <li><a href="css-note.html">CSS Practice</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="auth-wrapper">
+            <!-- Left Info Panel -->
+            <div class="auth-hero-side">
+                <div class="auth-hero-content">
+                    <span class="auth-hero-tag">Persistent Workspace</span>
+                    <h1 class="auth-hero-title">Pick Up Exactly Where You Left Off</h1>
+                    <p class="auth-hero-desc">
+                        Sign in to save your live CSS code edits, custom notes, quiz scores, and lesson progress automatically across sessions.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <div class="feature-text">
+                                <strong>Auto-Saved Live CSS Editor</strong>
+                                <span>Every line of CSS you type is saved to your account in real-time.</span>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <div class="feature-text">
+                                <strong>Personal Notes & Scratchpad</strong>
+                                <span>Keep custom notes alongside your lessons without losing progress.</span>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">✓</div>
+                            <div class="feature-text">
+                                <strong>Fresh Start Option</strong>
+                                <span>Option to reset or start fresh anytime you want a clean slate.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="demo-box">
+                    <h4>⚡ Quick Demo Credentials</h4>
+                    <p><strong>Username:</strong> student<br><strong>Password:</strong> password123</p>
+                </div>
+            </div>
+
+            <!-- Right Form Panel -->
+            <div class="auth-form-side">
+                <div class="tab-switcher">
+                    <button id="tabSignIn" class="tab-btn active" onclick="switchTab('signin')">Sign In</button>
+                    <button id="tabSignUp" class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+                </div>
+
+                <div id="alertBox" class="alert-box"></div>
+
+                <!-- SIGN IN FORM -->
+                <form id="signInForm" onsubmit="handleSignIn(event)">
+                    <div class="form-header">
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to load your saved work session.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signinIdentifier">Username or Email</label>
+                        <input type="text" id="signinIdentifier" class="form-input" placeholder="e.g. student or alex@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signinPassword">Password</label>
+                        <input type="password" id="signinPassword" class="form-input" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" checked>
+                            Remember me on this browser
+                        </label>
+                        <a href="#" class="forgot-link" onclick="alert('Demo notice: Try username student / password password123')">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Sign In & Load Work →</button>
+                </form>
+
+                <!-- SIGN UP FORM -->
+                <form id="signUpForm" onsubmit="handleSignUp(event)" style="display: none;">
+                    <div class="form-header">
+                        <h2>Create New Account</h2>
+                        <p>Sign up to start a fresh workspace and save your work.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" class="form-input" placeholder="e.g. Alex Johnson" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupUsername">Username</label>
+                        <input type="text" id="signupUsername" class="form-input" placeholder="e.g. alexj" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" class="form-input" placeholder="e.g. alex@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" class="form-input" placeholder="Create a secure password" required minlength="4">
+                    </div>
+
+                    <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);">
+                        Sign Up & Start Fresh Workspace ✨
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script>
+        let currentTab = 'signin';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            const tabSignIn = document.getElementById('tabSignIn');
+            const tabSignUp = document.getElementById('tabSignUp');
+            const signInForm = document.getElementById('signInForm');
+            const signUpForm = document.getElementById('signUpForm');
+            const alertBox = document.getElementById('alertBox');
+
+            alertBox.style.display = 'none';
+
+            if (tab === 'signin') {
+                tabSignIn.classList.add('active');
+                tabSignUp.classList.remove('active');
+                signInForm.style.display = 'block';
+                signUpForm.style.display = 'none';
+            } else {
+                tabSignUp.classList.add('active');
+                tabSignIn.classList.remove('active');
+                signUpForm.style.display = 'block';
+                signInForm.style.display = 'none';
+            }
+        }
+
+        function showAlert(message, type = 'error') {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.className = 'alert-box ' + type;
+            alertBox.textContent = message;
+            alertBox.style.display = 'block';
+        }
+
+        function handleSignIn(e) {
+            e.preventDefault();
+            const identifier = document.getElementById('signinIdentifier').value;
+            const password = document.getElementById('signinPassword').value;
+
+            const res = window.AuthEngine.signIn(identifier, password);
+            if (res.success) {
+                showAlert('✓ Success! Loading your saved work...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'css-note.html';
+                }, 1000);
+            } else {
+                showAlert(res.message, 'error');
+            }
+        }
+
+        function handleSignUp(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const username = document.getElementById('signupUsername').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            const res = window.AuthEngine.signUp(name, username, email, password);
+            if (res.success) {
+                showAlert('✓ Account created! Starting fresh workspace...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'css-note.html';
+                }, 1000);
+            } else {
+                showAlert(res.message, 'error');
+            }
+        }
+
+        // Auto-redirect if already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = window.AuthEngine.getCurrentUser();
+            if (user) {
+                showAlert(`Logged in as ${user.name}. Redirecting to your workspace...`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'css-note.html';
+                }, 1200);
+            }
+        });
+    </script>
+</body>
+</html>
