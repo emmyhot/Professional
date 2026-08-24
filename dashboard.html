@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard & Learning Hub | Learn IT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0b0b6b 0%, #090d2a 50%, #0f172a 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Bar Navigation */
+        header {
+            background: rgba(11, 11, 107, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 6%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-badge {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #ffffff;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .logo-title {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #facc15;
+        }
+
+        /* Dashboard Container */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 35px 20px 60px;
+        }
+
+        /* Profile Hero Banner */
+        .profile-hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.5), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 30px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .avatar-large {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #3b82f6 0%, #0284c7 100%);
+            color: #ffffff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-text h1 {
+            font-size: 1.8rem;
+            font-family: 'Outfit', sans-serif;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .profile-sub {
+            color: #94a3b8;
+            font-size: 0.92rem;
+        }
+
+        .stats-pills {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 12px 20px;
+            border-radius: 16px;
+            text-align: center;
+            min-width: 110px;
+        }
+
+        .stat-val {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #facc15;
+            display: block;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-lbl {
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        /* Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 26px;
+            margin-bottom: 30px;
+        }
+
+        .panel-title {
+            font-size: 1.25rem;
+            font-family: 'Outfit', sans-serif;
+            color: #ffffff;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Skill Progress Bars */
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .skill-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .skill-name {
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-pct {
+            color: #38bdf8;
+        }
+
+        .progress-bar-bg {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
+            transition: width 1s ease;
+        }
+
+        /* Action Buttons */
+        .cta-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Badges Grid */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 14px;
+        }
+
+        .badge-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px 10px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .badge-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .badge-icon {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .badge-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #e2e8f0;
+        }
+
+        .badge-card.locked {
+            opacity: 0.4;
+            filter: grayscale(1);
+        }
+
+        /* Certificate Item */
+        .cert-card {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.1), rgba(245, 158, 11, 0.05));
+            border: 1.5px solid rgba(250, 204, 21, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .cert-info h4 {
+            font-size: 1rem;
+            color: #facc15;
+            margin-bottom: 4px;
+        }
+
+        .cert-info p {
+            font-size: 0.82rem;
+            color: #cbd5e1;
+        }
+
+        .cert-view-btn {
+            background: #facc15;
+            color: #0f172a;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .cert-view-btn:hover {
+            background: #eab308;
+        }
+
+        /* Certificate Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: none;
+            place-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .certificate-frame {
+            background: #ffffff;
+            color: #1e293b;
+            width: 100%;
+            max-width: 750px;
+            padding: 40px;
+            border-radius: 12px;
+            border: 10px solid #0f172a;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            position: relative;
+        }
+
+        .cert-header-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0b0b6b;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .cert-sub {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .cert-student-name {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1e293b;
+            border-bottom: 2px solid #3b82f6;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin: 15px 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .cert-body-text {
+            font-size: 1rem;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .cert-footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .cert-seal {
+            width: 70px;
+            height: 70px;
+            background: #facc15;
+            color: #0f172a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.85rem;
+            border: 4px double #b45309;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-group">
+                <div class="logo-badge">IT</div>
+                <div class="logo-title">Learn IT</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html" style="color: #facc15;">Dashboard</a></li>
+                <li><a href="playground.html">Code Playground</a></li>
+                <li><a href="css-note.html">CSS Practice</a></li>
+                <li><a href="explore.html">Courses</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- PROFILE HERO BANNER -->
+        <div class="profile-hero">
+            <div class="profile-info">
+                <div id="userAvatar" class="avatar-large">A</div>
+                <div class="profile-text">
+                    <h1 id="userName">Alex Johnson</h1>
+                    <p id="userEmail" class="profile-sub">student@learnit.com • Account Active</p>
+                </div>
+            </div>
+
+            <div class="stats-pills">
+                <div class="stat-pill">
+                    <span id="userLevelVal" class="stat-val">Lvl 2</span>
+                    <span class="stat-lbl">Rank</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="userXPVal" class="stat-val">450</span>
+                    <span class="stat-lbl">Total XP</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="userStreakVal" class="stat-val">🔥 5</span>
+                    <span class="stat-lbl">Streak</span>
+                </div>
+                <div class="stat-pill">
+                    <span id="userCertsVal" class="stat-val">1</span>
+                    <span class="stat-lbl">Certificates</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN DASHBOARD GRID -->
+        <div class="dashboard-grid">
+            
+            <!-- LEFT COLUMN -->
+            <div>
+                <!-- Learning Track Progress -->
+                <div class="panel-card">
+                    <div class="panel-title">
+                        <span>🚀 Learning Track Progress</span>
+                        <a href="playground.html" class="cta-btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">
+                            Open Playground ⚡
+                        </a>
+                    </div>
+
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">🌐 HTML5 Fundamentals</span>
+                                <span class="skill-pct">100% Complete</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">🎨 Responsive CSS3 & Flexbox</span>
+                                <span class="skill-pct">85% In Progress</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">⚡ JavaScript ES6 & DOM Logic</span>
+                                <span class="skill-pct">60% In Progress</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">🐍 Python Programming</span>
+                                <span class="skill-pct">35%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 35%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-meta">
+                                <span class="skill-name">🗄️ SQL & Relational Databases</span>
+                                <span class="skill-pct">20%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verified Certificates -->
+                <div class="panel-card">
+                    <div class="panel-title">
+                        <span>🎓 Earned Verified Diplomas</span>
+                        <button class="cta-btn-primary" onclick="claimNewCert()" style="padding: 6px 14px; font-size: 0.8rem; background: #10b981;">
+                            + Claim New Certificate
+                        </button>
+                    </div>
+
+                    <div id="certListContainer">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div>
+                <!-- Badges & Achievements -->
+                <div class="panel-card">
+                    <div class="panel-title">
+                        <span>🏆 Achievements & Badges</span>
+                    </div>
+
+                    <div class="badges-grid">
+                        <div class="badge-card" title="Completed First Code Execution">
+                            <span class="badge-icon">🚀</span>
+                            <span class="badge-name">First Code</span>
+                        </div>
+                        <div class="badge-card" title="Passed Quiz with 100% Score">
+                            <span class="badge-icon">🎯</span>
+                            <span class="badge-name">Quiz Whiz</span>
+                        </div>
+                        <div class="badge-card" title="Maintained 5-Day Active Streak">
+                            <span class="badge-icon">🔥</span>
+                            <span class="badge-name">5-Day Streak</span>
+                        </div>
+                        <div class="badge-card" title="Wrote Custom Notes">
+                            <span class="badge-icon">📝</span>
+                            <span class="badge-name">Pro Notetaker</span>
+                        </div>
+                        <div class="badge-card locked" title="Reach Level 5 to unlock">
+                            <span class="badge-icon">👑</span>
+                            <span class="badge-name">Code Ninja</span>
+                        </div>
+                        <div class="badge-card locked" title="Complete 10 Lessons to unlock">
+                            <span class="badge-icon">🎓</span>
+                            <span class="badge-name">Graduate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Notes Quick View -->
+                <div class="panel-card">
+                    <div class="panel-title">
+                        <span>📌 Saved Personal Notes</span>
+                    </div>
+                    <div id="savedNotesSnippet" style="background: rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; font-size: 0.9rem; color: #cbd5e1; font-family: monospace; line-height: 1.5; min-height: 90px;">
+                        Loading notes...
+                    </div>
+                    <a href="css-note.html" style="display: inline-block; margin-top: 14px; color: #38bdf8; font-weight: 700; font-size: 0.88rem; text-decoration: none;">
+                        Edit Notes in Workspace →
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- CERTIFICATE MODAL -->
+    <div id="certModal" class="modal-overlay">
+        <div class="certificate-frame">
+            <button onclick="closeCertModal()" style="position: absolute; top: 15px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">✕</button>
+
+            <div class="cert-header-logo">Learn IT Academy</div>
+            <div class="cert-sub">Official Diploma of Completion</div>
+
+            <p style="color: #64748b; font-size: 0.95rem;">This is to certify that</p>
+            <div id="modalStudentName" class="cert-student-name">Alex Johnson</div>
+
+            <p class="cert-body-text">
+                has successfully completed all requirements, practical projects, and assessment exams for the course track:
+                <br><strong id="modalCertTitle" style="color: #0b0b6b; font-size: 1.1rem; display: block; margin-top: 8px;">Responsive Web Design & CSS Mastery</strong>
+            </p>
+
+            <div class="cert-footer-row">
+                <div style="text-align: left;">
+                    <strong id="modalCertDate" style="display: block; font-size: 0.9rem; color: #1e293b;">Date: 2026-08-20</strong>
+                    <span id="modalCertId" style="font-size: 0.78rem; color: #64748b;">Verification ID: CERT-CSS-9821</span>
+                </div>
+
+                <div class="cert-seal">
+                    VERIFIED<br>OFFICIAL
+                </div>
+
+                <div style="text-align: right;">
+                    <div style="font-family: cursive; font-size: 1.3rem; color: #0b0b6b; font-weight: bold;">Learn IT Director</div>
+                    <span style="font-size: 0.78rem; color: #64748b;">Academic Director</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <button onclick="window.print()" style="background: #0b0b6b; color: #fff; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 800; cursor: pointer;">
+                    🖨️ Print / Save Certificate PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        function loadDashboardData() {
+            if (!window.AuthEngine) return;
+
+            const user = window.AuthEngine.getCurrentUser();
+            const work = window.AuthEngine.loadUserWork();
+
+            if (user) {
+                document.getElementById('userName').textContent = user.name;
+                document.getElementById('userEmail').textContent = `${user.email} • Account Active`;
+                document.getElementById('userAvatar').textContent = user.name.charAt(0).toUpperCase();
+            } else {
+                document.getElementById('userName').textContent = 'Guest Student';
+                document.getElementById('userEmail').textContent = 'Sign in to save and sync your certificates';
+            }
+
+            document.getElementById('userLevelVal').textContent = `Lvl ${work.level || 1}`;
+            document.getElementById('userXPVal').textContent = work.xpPoints || 100;
+            document.getElementById('userStreakVal').textContent = `🔥 ${work.streakDays || 1}`;
+            
+            const certs = work.certificates || [];
+            document.getElementById('userCertsVal').textContent = certs.length;
+
+            // Render Certificates
+            const certContainer = document.getElementById('certListContainer');
+            if (certs.length === 0) {
+                certContainer.innerHTML = `
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 14px; text-align: center; color: #94a3b8;">
+                        No certificates earned yet. Complete lessons or click "+ Claim New Certificate" to verify your skills!
+                    </div>
+                `;
+            } else {
+                certContainer.innerHTML = certs.map(c => `
+                    <div class="cert-card">
+                        <div class="cert-info">
+                            <h4>🎓 ${c.title}</h4>
+                            <p>Issued: ${c.issueDate} • Verification ID: ${c.id}</p>
+                        </div>
+                        <button class="cert-view-btn" onclick="openCertModal('${c.id}', '${c.title}', '${c.issueDate}')">
+                            View Diploma 📜
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            // Render Notes snippet
+            const notes = work.userNotes || 'No custom notes written yet.';
+            document.getElementById('savedNotesSnippet').textContent = notes;
+        }
+
+        function openCertModal(id, title, date) {
+            const user = window.AuthEngine ? (window.AuthEngine.getCurrentUser() || { name: 'Alex Johnson' }) : { name: 'Alex Johnson' };
+            document.getElementById('modalStudentName').textContent = user.name;
+            document.getElementById('modalCertTitle').textContent = title;
+            document.getElementById('modalCertDate').textContent = `Date: ${date}`;
+            document.getElementById('modalCertId').textContent = `Verification ID: ${id}`;
+            document.getElementById('certModal').style.display = 'grid';
+        }
+
+        function closeCertModal() {
+            document.getElementById('certModal').style.display = 'none';
+        }
+
+        function claimNewCert() {
+            if (window.AuthEngine) {
+                const cert = window.AuthEngine.issueCertificate('Full-Stack Web Development & Modern IT Skills');
+                loadDashboardData();
+                openCertModal(cert.id, cert.title, cert.issueDate);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDashboardData);
+    </script>
+</body>
+</html>
